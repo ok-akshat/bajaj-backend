@@ -3,12 +3,11 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
-const port = 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post("/bfhl", (req, res) => {
+app.post("/api/bfhl", (req, res) => {
   const { data, file_b64 } = req.body;
 
   const numbers = data.filter((item) => /^\d+$/.test(item));
@@ -38,10 +37,8 @@ app.post("/bfhl", (req, res) => {
   res.json(response);
 });
 
-app.get("/bfhl", (req, res) => {
+app.get("/api/bfhl", (req, res) => {
   res.json({ operation_code: 1 });
 });
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-});
+module.exports = app;
